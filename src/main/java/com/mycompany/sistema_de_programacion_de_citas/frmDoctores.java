@@ -3,7 +3,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
 public class frmDoctores extends javax.swing.JFrame {
 private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmDoctores.class.getName());
     private void configurarTabla(){
@@ -40,7 +44,7 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
         jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jTextField6 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,15 +95,14 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
         jButton5.setText("Eliminar");
         jButton5.addActionListener(this::jButton5ActionPerformed);
 
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField6.setText("Buscar");
-        jTextField6.addActionListener(this::jTextField6ActionPerformed);
+        jButton3.setText("Buscar");
+        jButton3.addActionListener(this::jButton3ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -132,8 +135,8 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                                 .addComponent(jButton4)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -174,7 +177,7 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton4)
                         .addComponent(jButton5)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -227,6 +230,7 @@ try {
             this,
             "Contenido de la tabla guardado correctamente."
     );
+    modelo.setRowCount(0);
 } catch (IOException e) {
     JOptionPane.showMessageDialog(
             this,
@@ -236,75 +240,137 @@ try {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        int filaSeleccionada = jTable1.getSelectedRow();
-        if(filaSeleccionada >=0){
-           
-
-
-DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-modelo.setValueAt(jTextField1.getText().trim(), filaSeleccionada, 0);
-modelo.setValueAt(jTextField2.getText().trim(), filaSeleccionada, 1);
-modelo.setValueAt(jTextField3.getText().trim(), filaSeleccionada, 2);
-modelo.setValueAt(jTextField4.getText().trim(), filaSeleccionada, 3);
-modelo.setValueAt(jTextField4.getText().trim(), filaSeleccionada, 4);
-
-JOptionPane.showMessageDialog(this, "Registro modificado en la tabla. Presione 'Enviar' para guardar los cambios.");
-jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField1.requestFocus();
-     
-        }else{
-    
-        JOptionPane.showMessageDialog(this, "Seleccione o busque primero la fila que desea modificar.");
+       String codigoModificar = jTextField1.getText().trim();
+    if (codigoModificar.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese el código a modificar.");
+        return;
     }
+
+    File archivoOriginal = new File("CargoEspecialidad.txt");
+    if (!archivoOriginal.exists()) return;
+
+    ArrayList<String> lineasGuardar = new ArrayList<>();
+    boolean modificado = false;
+
+    try {
+        BufferedReader br = new BufferedReader(new FileReader(archivoOriginal));
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            String[] datos = linea.split(";");
+            if (datos.length == 5 && datos[0].equalsIgnoreCase(codigoModificar)) {
+                // Junta los nuevos datos de las casillas en una nueva línea
+                String nuevaLinea = codigoModificar + ";" + jTextField2.getText() + ";" + jTextField3.getText() + ";" + jTextField4.getText() + ";" + jTextField5.getText();
+                lineasGuardar.add(nuevaLinea);
+                modificado = true;
+            } else {
+                lineasGuardar.add(linea);
+            }
+        }
+        br.close();
+
+        FileWriter fw = new FileWriter(archivoOriginal, false);
+        for (String l : lineasGuardar) {
+            fw.write(l);
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
+
+        if (modificado) {
+            JOptionPane.showMessageDialog(this, "Doctor modificado con éxito.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Doctor no encontrado.");
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error al modificar: " + e.getMessage());
+    }
+
     
           
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int filaSeleccionada = jTable1.getSelectedRow();
-    
-    if (filaSeleccionada >= 0) {
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.removeRow(filaSeleccionada);
-        
-        JOptionPane.showMessageDialog(this, "Registro eliminado de la tabla.");
-        
-        // Limpiar campos
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-    } else {
-        JOptionPane.showMessageDialog(this, "Seleccione en la tabla el registro que desea eliminar.");
+        String codigoEliminar = jTextField1.getText().trim();
+    if (codigoEliminar.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese el código a eliminar.");
+        return;
+    }
+
+    File archivoOriginal = new File("CargoEspecialidad.txt");
+    if (!archivoOriginal.exists()) return;
+
+    ArrayList<String> lineasGuardar = new ArrayList<>();
+    boolean eliminado = false;
+
+    try {
+        BufferedReader br = new BufferedReader(new FileReader(archivoOriginal));
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            String[] datos = linea.split(";");
+            if (datos.length == 5 && datos[0].equalsIgnoreCase(codigoEliminar)) {
+                eliminado = true; 
+            } else {
+                lineasGuardar.add(linea);
+            }
+        }
+        br.close();
+
+        FileWriter fw = new FileWriter(archivoOriginal, false); 
+        for (String l : lineasGuardar) {
+            fw.write(l);
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
+
+        if (eliminado) {
+            JOptionPane.showMessageDialog(this, "Doctor eliminado del archivo.");
+            jTextField1.setText(""); jTextField2.setText(""); jTextField3.setText(""); jTextField4.setText(""); jTextField5.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Código no encontrado.");
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error en la operación: " + e.getMessage());
     }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        String codigoBuscar = jTextField1.getText().trim();
-        DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String codigoBuscado = jTextField1.getText().trim();
+        if (codigoBuscado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un código para buscar.");
+            return;
+        }
+        File archivo = new File("CargoEspecialidad.txt");
+        if (!archivo.exists()) {
+            JOptionPane.showMessageDialog(this, "El archivo de registros aún no existe.");
+            return;
+        }
         boolean encontrado = false;
-        
-        for (int fila = 0; fila < modelo.getRowCount(); fila++) {
-            if (modelo.getValueAt(fila, 0).toString().equalsIgnoreCase(codigoBuscar)) {
-                jTable1.setRowSelectionInterval(fila, fila);
-                jTextField2.setText(modelo.getValueAt(fila, 1).toString());
-                jTextField3.setText(modelo.getValueAt(fila, 2).toString());
-                jTextField4.setText(modelo.getValueAt(fila, 3).toString());
-                jTextField5.setText(modelo.getValueAt(fila, 4).toString());
-                
-                encontrado = true;
-                break;
-    }
-}
-        if (!encontrado) {
-            JOptionPane.showMessageDialog(this, "No se encontró ningún registro con ese código.");
-}
-    }//GEN-LAST:event_jTextField6ActionPerformed
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(archivo));
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(";");
+
+                if (datos.length == 5 && datos[0].equalsIgnoreCase(codigoBuscado)) {
+                    jTextField2.setText(datos[1]);
+                    jTextField3.setText(datos[2]);
+                    jTextField4.setText(datos[3]);
+                    jTextField5.setText(datos[4]);
+
+                    JOptionPane.showMessageDialog(this, "¡Doctor encontrado en el archivo!");
+                    encontrado = true;
+                    break;
+                }
+            }
+            br.close();
+
+            if (!encontrado) {
+                JOptionPane.showMessageDialog(this, "No se encontró ningún doctor con ese código.");
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,6 +401,7 @@ jTextField1.setText("");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -350,6 +417,5 @@ jTextField1.setText("");
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
