@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Rodrigo
  */
 public class Login extends javax.swing.JFrame {
-    
+    private int intentos = 0;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
 
     /**
@@ -118,6 +118,7 @@ public class Login extends javax.swing.JFrame {
         return;
         }
         
+        boolean loginExitoso = false;
         try {
         BufferedReader br = new BufferedReader(new FileReader(archivo));
         String linea;
@@ -126,6 +127,7 @@ public class Login extends javax.swing.JFrame {
             String[] datos = linea.split(";");
             
             if (datos.length == 3 && datos[0].equalsIgnoreCase(usuario) && datos[2].equals(contraseña)) {
+                loginExitoso = true;
                 GestorSesion.guardarSesion(usuario);
                 if (datos[0].equals("admin")){
                     Menú menu= new Menú();
@@ -143,7 +145,19 @@ public class Login extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error al leer el archivo: " + e.getMessage());
         }
+        if (!loginExitoso) {
+        intentos++;
+        int intentosRestantes = 3 - intentos;
         
+        if (intentosRestantes > 0) {
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Te quedan " + intentosRestantes + " intento(s).");
+        } else {
+            JOptionPane.showMessageDialog(this, "Has agotado tus 3 intentos. Acceso bloqueado.");
+            jButton1.setEnabled(false); 
+            this.dispose();
+        }
+    }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
