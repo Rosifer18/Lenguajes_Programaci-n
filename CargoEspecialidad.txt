@@ -1,0 +1,5 @@
+C002;Oscar;Doctor;Cardiologia;990302331
+C003;Dana;Enfremera;Cuidados Intensivos;958045301
+C004;Karen;Doctora;Pediatra;201134573
+C002;Dana;Doctora;Obstreticia;910918403
+C003;Paola;Enfermera;Pediatra;920923504
