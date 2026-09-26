@@ -1,4 +1,7 @@
 package com.mycompany.sistema_de_programacion_de_citas;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
@@ -14,6 +17,7 @@ public class Usuarios extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Usuarios.class.getName());
     public Usuarios() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -34,7 +38,7 @@ public class Usuarios extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("REGISTRO DE USUARIOS");
 
@@ -167,6 +171,7 @@ public class Usuarios extends javax.swing.JFrame {
                 "Error al guardar el archivo: " + e.getMessage()
         );
     }
+    modelo.setRowCount(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -196,23 +201,36 @@ public class Usuarios extends javax.swing.JFrame {
             javax.swing.JOptionPane.WARNING_MESSAGE);
         return;
     } 
-    boolean encontrado = false;
-    for (int i = 0; i < jTable1.getRowCount(); i++) {
-        String idTabla = jTable1.getValueAt(i, 1).toString();
-        if (idTabla.equalsIgnoreCase(idBuscado)) {
-            jTable1.setRowSelectionInterval(i, i);
-            jTextField1.setText(jTable1.getValueAt(i, 0).toString());
-            jTextField3.setText(jTable1.getValueAt(i, 2).toString());
+File archivo = new File("registros.txt");
+if (!archivo.exists()) {
+    JOptionPane.showMessageDialog(this, "El archivo de registros aún no existe.");
+    return;
+}
+boolean encontrado = false;
+try {
+    BufferedReader br = new BufferedReader(new FileReader(archivo));
+    String linea;
+    
+    while ((linea = br.readLine()) != null) {
+        String[] datos = linea.split(";");
+
+        if (datos.length == 3 && datos[1].equalsIgnoreCase(idBuscado)) {
+            jTextField1.setText(datos[0]);
+            jTextField2.setText(datos[1]);
+            jTextField3.setText(datos[2]);
+            JOptionPane.showMessageDialog(this, "¡Usuario encontrado en el archivo!");
             encontrado = true;
-            break; 
+            break;
         }
     }
+    br.close();
+
     if (!encontrado) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "No se encontró ningún usuario con el ID: " + idBuscado, 
-            "No encontrado", 
-            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "No se encontró ningún usuario con ese ID.");
     }
+} catch (IOException e) {
+    JOptionPane.showMessageDialog(this, "Error al leer el archivo: " + e.getMessage());
+}
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

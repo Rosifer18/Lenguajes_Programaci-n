@@ -17,6 +17,7 @@ public class DISEÑOPACIENTES extends javax.swing.JFrame {
      */
     public DISEÑOPACIENTES() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -47,8 +48,10 @@ public class DISEÑOPACIENTES extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        txtMedicamento = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("CÓDIGO:");
 
@@ -91,33 +94,17 @@ public class DISEÑOPACIENTES extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CÓDIGO", "NOMBRE", "DNI", "EDAD", "TELEFONO"
+                "CÓDIGO", "NOMBRE", "DNI", "EDAD", "TELEFONO", "MEDICAMENTO"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jLabel7.setText("MEDICAMENTO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(97, 97, 97)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(71, 71, 71))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -140,6 +127,30 @@ public class DISEÑOPACIENTES extends javax.swing.JFrame {
                         .addGap(272, 272, 272)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addGap(84, 84, 84)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(71, 577, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +171,7 @@ public class DISEÑOPACIENTES extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -168,7 +179,11 @@ public class DISEÑOPACIENTES extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(67, 67, 67)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txtMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGuardar)
                             .addComponent(btnBuscar)
@@ -203,9 +218,10 @@ public class DISEÑOPACIENTES extends javax.swing.JFrame {
     String dni = txtDNI.getText().trim();
     String edad = txtEdad.getText().trim();
     String telefono = txtTelefono.getText().trim();
+    String medicamento = txtMedicamento.getText().trim();
 
     // Validación de campos vacíos
-    if (codigo.isEmpty() || nombre.isEmpty() || dni.isEmpty() || edad.isEmpty() || telefono.isEmpty()) {
+    if (codigo.isEmpty() || nombre.isEmpty() || dni.isEmpty() || edad.isEmpty() || telefono.isEmpty() || medicamento.isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos incompletos", javax.swing.JOptionPane.WARNING_MESSAGE);
         return;
     }
@@ -214,7 +230,7 @@ public class DISEÑOPACIENTES extends javax.swing.JFrame {
     javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTable1.getModel();
     
     // Agregar la nueva fila a la tabla con los datos capturados
-    modelo.addRow(new Object[]{codigo, nombre, dni, edad, telefono});
+    modelo.addRow(new Object[]{codigo, nombre, dni, edad, telefono,medicamento});
 
     // Limpiar los campos de texto
     txtCodigo.setText("");
@@ -222,7 +238,9 @@ public class DISEÑOPACIENTES extends javax.swing.JFrame {
     txtDNI.setText("");
     txtEdad.setText("");
     txtTelefono.setText("");
+    txtMedicamento.setText("");
     txtCodigo.requestFocus();
+    
 // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -244,11 +262,12 @@ try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileRead
     String linea;
     while ((linea = br.readLine()) != null) {
         String[] datos = linea.split(";");
-        if (datos.length == 5 && datos[0].equalsIgnoreCase(codigoBuscado)) {
+        if (datos.length == 6 && datos[0].equalsIgnoreCase(codigoBuscado)) {
             txtNombre.setText(datos[1]);
             txtDNI.setText(datos[2]);
             txtEdad.setText(datos[3]);
             txtTelefono.setText(datos[4]);
+            txtMedicamento.setText(datos[6]);
 
             javax.swing.JOptionPane.showMessageDialog(this, "¡Paciente encontrado!");
             encontrado = true;
@@ -284,8 +303,8 @@ try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileRead
     String linea;
     while ((linea = br.readLine()) != null) {
         String[] datos = linea.split(";");
-        if (datos.length == 5 && datos[0].equalsIgnoreCase(codigoModificar)) {
-            String nuevaLinea = codigoModificar + ";" + txtNombre.getText() + ";" + txtDNI.getText() + ";" + txtEdad.getText() + ";" + txtTelefono.getText();
+        if (datos.length == 6 && datos[0].equalsIgnoreCase(codigoModificar)) {
+            String nuevaLinea = codigoModificar + ";" + txtNombre.getText() + ";" + txtDNI.getText() + ";" + txtEdad.getText() + ";" + txtTelefono.getText() + ";" + txtMedicamento.getText();
             lineasGuardar.add(nuevaLinea);
             modificado = true;
         } else {
@@ -329,7 +348,7 @@ try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileRead
     String linea;
     while ((linea = br.readLine()) != null) {
         String[] datos = linea.split(";");
-        if (datos.length == 5 && datos[0].equalsIgnoreCase(codigoEliminar)) {
+        if (datos.length == 6 && datos[0].equalsIgnoreCase(codigoEliminar)) {
             eliminado = true;
         } else {
             lineasGuardar.add(linea);
@@ -352,6 +371,7 @@ try (java.io.FileWriter fw = new java.io.FileWriter(archivoOriginal, false)) {
         txtDNI.setText("");
         txtEdad.setText("");
         txtTelefono.setText("");
+        txtMedicamento.setText("");
     } else {
         javax.swing.JOptionPane.showMessageDialog(this, "Código no encontrado.");
     }
@@ -375,8 +395,9 @@ try (java.io.FileWriter archivo = new java.io.FileWriter("pacientes.txt", true))
         String dni = modelo.getValueAt(fila, 2).toString();
         String edad = modelo.getValueAt(fila, 3).toString();
         String telefono = modelo.getValueAt(fila, 4).toString();
+        String medicamento = modelo.getValueAt(fila,5).toString();
 
-        archivo.write(codigo + ";" + nombre + ";" + dni + ";" + edad + ";" + telefono);
+        archivo.write(codigo + ";" + nombre + ";" + dni + ";" + edad + ";" + telefono + ";" + medicamento);
         archivo.write(System.lineSeparator());
     }
     archivo.close();
@@ -395,6 +416,7 @@ txtNombre.setText("");
 txtDNI.setText("");
 txtEdad.setText("");
 txtTelefono.setText("");
+txtMedicamento.setText("");
 txtCodigo.requestFocus();        // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -436,11 +458,13 @@ txtCodigo.requestFocus();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtMedicamento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

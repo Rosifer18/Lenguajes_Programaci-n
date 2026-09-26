@@ -4,6 +4,12 @@
  */
 package com.mycompany.sistema_de_programacion_de_citas;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rodrigo
@@ -17,6 +23,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -45,7 +52,10 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setText("Contraseña");
 
+        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+
         jButton1.setText("Entrar");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,6 +108,47 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String usuario=jTextField1.getText();
+        String contraseña= new String(jPasswordField1.getPassword());
+        File archivo = new File("registros.txt");
+        if (!archivo.exists()) {
+        JOptionPane.showMessageDialog(this, "El archivo de registros aún no existe.");
+        return;
+        }
+        
+        try {
+        BufferedReader br = new BufferedReader(new FileReader(archivo));
+        String linea;
+
+        while ((linea = br.readLine()) != null) {
+            String[] datos = linea.split(";");
+            
+            if (datos.length == 3 && datos[0].equalsIgnoreCase(usuario) && datos[2].equals(contraseña)) {
+                GestorSesion.guardarSesion(usuario);
+                if (datos[0].equals("admin")){
+                    Menú menu= new Menú();
+                    menu.setVisible(true);
+                }else{
+                Formulario_registrar_citas reg_citas = new Formulario_registrar_citas();
+                reg_citas.setVisible(true);
+                }
+                this.dispose();
+                break;
+                
+            }
+        }
+        br.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo: " + e.getMessage());
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments

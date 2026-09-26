@@ -1,3 +1,6 @@
 MED1;panadol;paracetamol;sanofi;44
 MED3;aspirina;acido acetilsalicilico;Medifarma;33
 MED08;panadol;paracetamol;MiFarma;20
+002;adadf;asdfa;efsf;adsfa;dafsdf
+002;adsas;asdf;asasdf;adcvdcccc;cccc
+
