@@ -1,5 +1,6 @@
-package com.mycompany.sistema_de_programacion_de_citas;
+package Modelo;
 
+import Modelo.Medicamento;
 import java.io.*;
 import java.util.ArrayList;
 

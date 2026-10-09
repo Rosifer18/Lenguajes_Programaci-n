@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.sistema_de_programacion_de_citas;
+package Vista;
 
+import com.mycompany.sistema_de_programacion_de_citas.Formulario_registrar_citas;
+import com.mycompany.sistema_de_programacion_de_citas.GestorSesion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -130,8 +132,8 @@ public class Login extends javax.swing.JFrame {
                 loginExitoso = true;
                 GestorSesion.guardarSesion(usuario);
                 if (datos[0].equals("admin")){
-                    Menú menu= new Menú();
-                    menu.setVisible(true);
+                    PantallaPrincipal pantallaprincipal= new PantallaPrincipal();
+                    pantallaprincipal.setVisible(true);
                 }else{
                 Formulario_registrar_citas reg_citas = new Formulario_registrar_citas();
                 reg_citas.setVisible(true);

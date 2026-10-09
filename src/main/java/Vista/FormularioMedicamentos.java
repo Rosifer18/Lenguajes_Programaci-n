@@ -1,13 +1,34 @@
+package Vista;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.sistema_de_programacion_de_citas;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import Modelo.CRUDMedicamentos;
+import Modelo.Medicamento;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 public class FormularioMedicamentos extends javax.swing.JFrame {
+    
+    public javax.swing.JTextField getTxtCodigo() { return txtCodigo; }
+    public javax.swing.JTextField getTxtNombre() { return txtNombre; }
+    public javax.swing.JTextField getTxtComponente() { return txtComponente; }
+    public javax.swing.JTextField getTxtLaboratorio() { return txtLaboratorio; }
+    public javax.swing.JTextField getTxtStock() { return txtStock; }
+    public javax.swing.JButton getBtnGuardar() { return btnGuardar; }
+    public javax.swing.JButton getBtnBuscar() { return btnBuscar; }
+    public javax.swing.JButton getBtnModificar() { return btnModificar; }
+    public javax.swing.JButton getBtnEliminar() { return btnEliminar; }
+    public javax.swing.JButton getBtnEnviar() { return btnEnviar; }
+    public javax.swing.JTable getJTable3() { return jTable3; }
+    
+    
+    
+    
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormularioMedicamentos.class.getName());
 
@@ -23,20 +44,31 @@ public class FormularioMedicamentos extends javax.swing.JFrame {
         initComponents();
         configurarTabla(); 
         setLocationRelativeTo(null); 
+        txtStock.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+                    e.consume(); 
+                }
+            }
+        });
     }
     
-    private void limpiarFormulario() {
+    public void limpiarFormulario() {
     txtCodigo.setText("");
     txtNombre.setText("");
     txtComponente.setText("");
     txtLaboratorio.setText("");
     txtStock.setText("");
     txtCodigo.requestFocus();
-}
-    private void mostrarMensaje(String texto) {
+    }
+    
+    public void mostrarMensaje(String texto) {
     javax.swing.JOptionPane.showMessageDialog(this, texto);
-}
-
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,11 +95,11 @@ public class FormularioMedicamentos extends javax.swing.JFrame {
         txtStock = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnEnviar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -125,20 +157,20 @@ public class FormularioMedicamentos extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
-        jButton3.setText("Modificar");
-        jButton3.addActionListener(this::jButton3ActionPerformed);
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(this::btnModificarActionPerformed);
 
-        jButton4.setText("Eliminar");
-        jButton4.addActionListener(this::jButton4ActionPerformed);
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
-        jButton5.setText("Enviar");
-        jButton5.addActionListener(this::jButton5ActionPerformed);
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(this::btnEnviarActionPerformed);
 
         jLabel6.setText("FORMULARIO DE MEDICAMENTOS");
 
@@ -152,15 +184,15 @@ public class FormularioMedicamentos extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnGuardar)
                                 .addGap(26, 26, 26)
-                                .addComponent(jButton2)
+                                .addComponent(btnBuscar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3)
+                                .addComponent(btnModificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton5))
+                                .addComponent(btnEnviar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -212,44 +244,21 @@ public class FormularioMedicamentos extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2)
-                        .addComponent(jButton5)
-                        .addComponent(jButton4)))
+                        .addComponent(btnGuardar)
+                        .addComponent(btnBuscar)
+                        .addComponent(btnEnviar)
+                        .addComponent(btnEliminar)))
                 .addContainerGap(338, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String codigo = txtCodigo.getText();
-    String nombre = txtNombre.getText();
-    String componente = txtComponente.getText();
-    String laboratorio = txtLaboratorio.getText();
-    String stock = txtStock.getText();
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-    if (codigo.isEmpty() || nombre.isEmpty() || componente.isEmpty() || laboratorio.isEmpty() || stock.isEmpty()) {
-        mostrarMensaje("Por favor, complete todos los campos.");
-        return;
-    }
-
-    Medicamento med = new Medicamento(codigo, nombre, componente, laboratorio, stock);
-
-    CRUDMedicamentos crud = new CRUDMedicamentos();
-    if (crud.guardar(med)) {
-        DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
-        modelo.addRow(new Object[]{codigo, nombre, componente, laboratorio, stock});
-        
-        limpiarFormulario();
-        mostrarMensaje("Medicamento registrado con éxito.");
-    } else {
-        mostrarMensaje("Error al guardar el medicamento.");
-    }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComponenteActionPerformed
         // TODO add your handling code here:
@@ -259,100 +268,21 @@ public class FormularioMedicamentos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStockActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-                                      
-    DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
-    if (modelo.getRowCount() == 0) {
-        mostrarMensaje("La tabla está vacía.");
-        return;
-    }
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
 
-    ArrayList<Medicamento> listaParaEnviar = new ArrayList<>();
-    for (int fila = 0; fila < modelo.getRowCount(); fila++) {
-        Medicamento med = new Medicamento(
-            modelo.getValueAt(fila, 0).toString(),
-            modelo.getValueAt(fila, 1).toString(),
-            modelo.getValueAt(fila, 2).toString(),
-            modelo.getValueAt(fila, 3).toString(),
-            modelo.getValueAt(fila, 4).toString()
-        );
-        listaParaEnviar.add(med);
-    }
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
-    CRUDMedicamentos crud = new CRUDMedicamentos();
-    if (crud.guardarLista(listaParaEnviar)) {
-        mostrarMensaje("Contenido de la tabla guardado correctamente.");
-        modelo.setRowCount(0);
-    } else {
-        mostrarMensaje("Error al guardar el contenido de la tabla.");
-    }
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-                                         
-    String codigoBuscado = txtCodigo.getText().trim();
-    if (codigoBuscado.isEmpty()) {
-        mostrarMensaje("Por favor, ingrese un código para buscar.");
-        return;
-    }
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+                          
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
-    CRUDMedicamentos crud = new CRUDMedicamentos();
-    Medicamento medEncontrado = crud.buscarPorCodigo(codigoBuscado);
-
-    if (medEncontrado != null) {
-        txtNombre.setText(medEncontrado.nombre());
-        txtComponente.setText(medEncontrado.componente());
-        txtLaboratorio.setText(medEncontrado.laboratorio());
-        txtStock.setText(medEncontrado.stock());
-        mostrarMensaje("¡Medicamento encontrado!");
-    } else {
-        mostrarMensaje("No se encontró ningún medicamento con ese código.");
-    }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    String codigoEliminar = txtCodigo.getText().trim();
-    if (codigoEliminar.isEmpty()) {
-        mostrarMensaje("Ingrese el código a eliminar.");
-        return;
-    }
-
-    CRUDMedicamentos crud = new CRUDMedicamentos();
-    if (crud.eliminar(codigoEliminar)) {
-        mostrarMensaje("Medicamento eliminado del archivo.");
-        limpiarFormulario();
-    } else {
-        mostrarMensaje("Código no encontrado.");
-    }
-                                     
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    String codigoModificar = txtCodigo.getText().trim();
-    if (codigoModificar.isEmpty()) {
-        mostrarMensaje("Ingrese el código a modificar.");
-        return;
-    }
-
-    Medicamento nuevosDatos = new Medicamento(
-        codigoModificar, 
-        txtNombre.getText(), 
-        txtComponente.getText(), 
-        txtLaboratorio.getText(), 
-        txtStock.getText()
-    );
-
-    CRUDMedicamentos crud = new CRUDMedicamentos();
-    if (crud.modificar(codigoModificar, nuevosDatos)) {
-        mostrarMensaje("Medicamento modificado con éxito.");
-        limpiarFormulario();
-    } else {
-        mostrarMensaje("Código no encontrado o error en el archivo.");
-    }
-
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+    
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,11 +290,11 @@ public class FormularioMedicamentos extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
