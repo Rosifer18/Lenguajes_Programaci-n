@@ -3,11 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.sistema_de_programacion_de_citas;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +24,18 @@ public class FormularioMedicamentos extends javax.swing.JFrame {
         configurarTabla(); 
         setLocationRelativeTo(null); 
     }
+    
+    private void limpiarFormulario() {
+    txtCodigo.setText("");
+    txtNombre.setText("");
+    txtComponente.setText("");
+    txtLaboratorio.setText("");
+    txtStock.setText("");
+    txtCodigo.requestFocus();
+}
+    private void mostrarMensaje(String texto) {
+    javax.swing.JOptionPane.showMessageDialog(this, texto);
+}
 
 
     /**
@@ -218,34 +225,29 @@ public class FormularioMedicamentos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    String codigo = txtCodigo.getText();
+    String nombre = txtNombre.getText();
+    String componente = txtComponente.getText();
+    String laboratorio = txtLaboratorio.getText();
+    String stock = txtStock.getText();
 
-String codigo = txtCodigo.getText();
-String nombre = txtNombre.getText();
-String componente = txtComponente.getText();
-String laboratorio = txtLaboratorio.getText();
-String stock = txtStock.getText();
+    if (codigo.isEmpty() || nombre.isEmpty() || componente.isEmpty() || laboratorio.isEmpty() || stock.isEmpty()) {
+        mostrarMensaje("Por favor, complete todos los campos.");
+        return;
+    }
 
-if (codigo.isEmpty() || nombre.isEmpty() || componente.isEmpty() || laboratorio.isEmpty() || stock.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
-    return;
-}
+    Medicamento med = new Medicamento(codigo, nombre, componente, laboratorio, stock);
 
-DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
-
-modelo.addRow(new Object[]{
-    codigo,
-    nombre,
-    componente,
-    laboratorio,
-    stock
-});
-
-txtCodigo.setText("");
-txtNombre.setText("");
-txtComponente.setText("");
-txtLaboratorio.setText("");
-txtStock.setText("");
-txtCodigo.requestFocus();
+    CRUDMedicamentos crud = new CRUDMedicamentos();
+    if (crud.guardar(med)) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
+        modelo.addRow(new Object[]{codigo, nombre, componente, laboratorio, stock});
+        
+        limpiarFormulario();
+        mostrarMensaje("Medicamento registrado con éxito.");
+    } else {
+        mostrarMensaje("Error al guardar el medicamento.");
+    }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -258,163 +260,96 @@ txtCodigo.requestFocus();
     }//GEN-LAST:event_txtStockActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+                                      
     DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
-    try {
-        // Abre o crea el archivo de texto en modo adicion (true)
-        FileWriter archivo = new FileWriter("medicamentos.txt", true);
-        
-        // Recorrer todas las filas de la tabla
-        for (int fila = 0; fila < modelo.getRowCount(); fila++) {
-            String codigo = modelo.getValueAt(fila, 0).toString();
-            String nombre = modelo.getValueAt(fila, 1).toString();
-            String componente = modelo.getValueAt(fila, 2).toString();
-            String laboratorio = modelo.getValueAt(fila, 3).toString();
-            String stock = modelo.getValueAt(fila, 4).toString();
-            
-            // Escribir en el bloc de notas separado por punto y coma (;)
-            archivo.write(codigo + ";" + nombre + ";" + componente + ";" + laboratorio + ";" + stock);
-            archivo.write(System.lineSeparator()); // Salto de línea
-        }
-        archivo.close();
-        
-        JOptionPane.showMessageDialog(this, "Contenido de la tabla guardado en el archivo correctamente.");
-        modelo.setRowCount(0); // Limpia la tabla visual
-        
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error al guardar el archivo: " + e.getMessage());
+    if (modelo.getRowCount() == 0) {
+        mostrarMensaje("La tabla está vacía.");
+        return;
+    }
+
+    ArrayList<Medicamento> listaParaEnviar = new ArrayList<>();
+    for (int fila = 0; fila < modelo.getRowCount(); fila++) {
+        Medicamento med = new Medicamento(
+            modelo.getValueAt(fila, 0).toString(),
+            modelo.getValueAt(fila, 1).toString(),
+            modelo.getValueAt(fila, 2).toString(),
+            modelo.getValueAt(fila, 3).toString(),
+            modelo.getValueAt(fila, 4).toString()
+        );
+        listaParaEnviar.add(med);
+    }
+
+    CRUDMedicamentos crud = new CRUDMedicamentos();
+    if (crud.guardarLista(listaParaEnviar)) {
+        mostrarMensaje("Contenido de la tabla guardado correctamente.");
+        modelo.setRowCount(0);
+    } else {
+        mostrarMensaje("Error al guardar el contenido de la tabla.");
     }
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-String codigoBuscado = txtCodigo.getText().trim();
-if (codigoBuscado.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "Por favor, ingrese un código para buscar.");
-    return;
-}
-File archivo = new File("medicamentos.txt");
-if (!archivo.exists()) {
-    JOptionPane.showMessageDialog(this, "El archivo de registros aún no existe.");
-    return;
-}
-boolean encontrado = false;
-try {
-    BufferedReader br = new BufferedReader(new FileReader(archivo));
-    String linea;
-    
-    while ((linea = br.readLine()) != null) {
-        String[] datos = linea.split(";");
-
-        if (datos.length == 5 && datos[0].equalsIgnoreCase(codigoBuscado)) {
-            txtNombre.setText(datos[1]);
-            txtComponente.setText(datos[2]);
-            txtLaboratorio.setText(datos[3]);
-            txtStock.setText(datos[4]);
-            
-            JOptionPane.showMessageDialog(this, "¡Medicamento encontrado en el archivo!");
-            encontrado = true;
-            break;
-        }
+                                         
+    String codigoBuscado = txtCodigo.getText().trim();
+    if (codigoBuscado.isEmpty()) {
+        mostrarMensaje("Por favor, ingrese un código para buscar.");
+        return;
     }
-    br.close();
 
-    if (!encontrado) {
-        JOptionPane.showMessageDialog(this, "No se encontró ningún medicamento con ese código.");
+    CRUDMedicamentos crud = new CRUDMedicamentos();
+    Medicamento medEncontrado = crud.buscarPorCodigo(codigoBuscado);
+
+    if (medEncontrado != null) {
+        txtNombre.setText(medEncontrado.nombre());
+        txtComponente.setText(medEncontrado.componente());
+        txtLaboratorio.setText(medEncontrado.laboratorio());
+        txtStock.setText(medEncontrado.stock());
+        mostrarMensaje("¡Medicamento encontrado!");
+    } else {
+        mostrarMensaje("No se encontró ningún medicamento con ese código.");
     }
-} catch (IOException e) {
-    JOptionPane.showMessageDialog(this, "Error al leer el archivo: " + e.getMessage());
-}
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
     String codigoEliminar = txtCodigo.getText().trim();
     if (codigoEliminar.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese el código a eliminar.");
+        mostrarMensaje("Ingrese el código a eliminar.");
         return;
     }
 
-    File archivoOriginal = new File("medicamentos.txt");
-    if (!archivoOriginal.exists()) return;
-
-    ArrayList<String> lineasGuardar = new ArrayList<>();
-    boolean eliminado = false;
-
-    try {
-        BufferedReader br = new BufferedReader(new FileReader(archivoOriginal));
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(";");
-            if (datos.length == 5 && datos[0].equalsIgnoreCase(codigoEliminar)) {
-                eliminado = true; 
-            } else {
-                lineasGuardar.add(linea);
-            }
-        }
-        br.close();
-
-        FileWriter fw = new FileWriter(archivoOriginal, false); 
-        for (String l : lineasGuardar) {
-            fw.write(l);
-            fw.write(System.lineSeparator());
-        }
-        fw.close();
-
-        if (eliminado) {
-            JOptionPane.showMessageDialog(this, "Medicamento eliminado del archivo.");
-            txtCodigo.setText(""); txtNombre.setText(""); txtComponente.setText(""); txtLaboratorio.setText(""); txtStock.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "Código no encontrado.");
-        }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error en la operación: " + e.getMessage());
+    CRUDMedicamentos crud = new CRUDMedicamentos();
+    if (crud.eliminar(codigoEliminar)) {
+        mostrarMensaje("Medicamento eliminado del archivo.");
+        limpiarFormulario();
+    } else {
+        mostrarMensaje("Código no encontrado.");
     }
-
+                                     
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     String codigoModificar = txtCodigo.getText().trim();
     if (codigoModificar.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese el código a modificar.");
+        mostrarMensaje("Ingrese el código a modificar.");
         return;
     }
 
-    File archivoOriginal = new File("medicamentos.txt");
-    if (!archivoOriginal.exists()) return;
+    Medicamento nuevosDatos = new Medicamento(
+        codigoModificar, 
+        txtNombre.getText(), 
+        txtComponente.getText(), 
+        txtLaboratorio.getText(), 
+        txtStock.getText()
+    );
 
-    ArrayList<String> lineasGuardar = new ArrayList<>();
-    boolean modificado = false;
-
-    try {
-        BufferedReader br = new BufferedReader(new FileReader(archivoOriginal));
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(";");
-            if (datos.length == 5 && datos[0].equalsIgnoreCase(codigoModificar)) {
-                // Junta los nuevos datos de las casillas en una nueva línea
-                String nuevaLinea = codigoModificar + ";" + txtNombre.getText() + ";" + txtComponente.getText() + ";" + txtLaboratorio.getText() + ";" + txtStock.getText();
-                lineasGuardar.add(nuevaLinea);
-                modificado = true;
-            } else {
-                lineasGuardar.add(linea);
-            }
-        }
-        br.close();
-
-        FileWriter fw = new FileWriter(archivoOriginal, false);
-        for (String l : lineasGuardar) {
-            fw.write(l);
-            fw.write(System.lineSeparator());
-        }
-        fw.close();
-
-        if (modificado) {
-            JOptionPane.showMessageDialog(this, "Medicamento modificado con éxito.");
-        } else {
-            JOptionPane.showMessageDialog(this, "Código no encontrado.");
-        }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error al modificar: " + e.getMessage());
+    CRUDMedicamentos crud = new CRUDMedicamentos();
+    if (crud.modificar(codigoModificar, nuevosDatos)) {
+        mostrarMensaje("Medicamento modificado con éxito.");
+        limpiarFormulario();
+    } else {
+        mostrarMensaje("Código no encontrado o error en el archivo.");
     }
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -448,4 +383,5 @@ try {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
-}
+} 
+
