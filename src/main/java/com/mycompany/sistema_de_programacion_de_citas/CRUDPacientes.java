@@ -15,11 +15,13 @@ public class CRUDPacientes {
     public void crear(Pacientes p) {
         try (FileWriter escritor = new FileWriter(archivo, true)) {
             escritor.write(
-                    p.getcodigo() + ";" +
-                    p.getnombre() + ";" +
+                    p.getNombres() + ";" +
+                    p.getAPELLIDOPATERNO() + ";" +
+                    p.getAPELLIDOMATERNO() + ";" +
                     p.getDNI() + ";" +
-                    p.getedad() + ";" +
-                    p.gettelefono()
+                    p.getTELEFONO() + ";" +
+                    p.getDIRECCION() + ";" +
+                    p.getCORREO() + ";" 
             );
             escritor.write("\n");
         } catch (IOException e) {
@@ -39,7 +41,9 @@ public class CRUDPacientes {
                             datos[1],
                             datos[2],
                             datos[3],
-                            datos[4]
+                            datos[4],
+                            datos[5],
+                            datos[6]
                     );
                 }
             }
@@ -56,12 +60,14 @@ public class CRUDPacientes {
             String linea;
             while ((linea = lector.readLine()) != null) {
                 String[] datos = linea.split(";");
-                if (datos.length > 0 && datos[0].equals(pacienteModificado.getcodigo())) {
-                    String lineaNueva = pacienteModificado.getcodigo() + ";" +
-                                        pacienteModificado.getnombre() + ";" +
+                if (datos.length > 0 && datos[0].equals(pacienteModificado.getDNI())) {
+                    String lineaNueva = pacienteModificado.getNombres() + ";" +
+                                        pacienteModificado.getAPELLIDOPATERNO() + ";" +
+                                        pacienteModificado.getAPELLIDOMATERNO() + ";" +
                                         pacienteModificado.getDNI() + ";" +
-                                        pacienteModificado.getedad() + ";" +
-                                        pacienteModificado.gettelefono();
+                                        pacienteModificado.getTELEFONO() + ";" +
+                                        pacienteModificado.getDIRECCION() + ";" +
+                                        pacienteModificado.getCORREO();
                     lineas.add(lineaNueva);
                 } else {
                     lineas.add(linea);
@@ -70,14 +76,7 @@ public class CRUDPacientes {
         } catch (IOException e) {
             System.out.println("Error al leer el archivo para modificar: " + e.getMessage());
         }
-
-        try (FileWriter escritor = new FileWriter(archivo, false)) {
-            for (String l : lineas) {
-                escritor.write(l + "\n");
-            }
-        } catch (IOException e) {
-            System.out.println("Error al actualizar el archivo: " + e.getMessage());
-        }
+        guardarLineas(lineas);
     }
 
     // 4. ELIMINAR PACIENTE
@@ -94,13 +93,15 @@ public class CRUDPacientes {
         } catch (IOException e) {
             System.out.println("Error al leer el archivo para eliminar: " + e.getMessage());
         }
-
-        try (FileWriter escritor = new FileWriter(archivo, false)) {
-            for (String l : lineas) {
-                escritor.write(l + "\n");
-            }
-        } catch (IOException e) {
-            System.out.println("Error al guardar cambios tras eliminar: " + e.getMessage());
-        }
+        guardarLineas(lineas);
     }
+        private void guardarLineas(List<String> lineas) {
+            try (FileWriter escritor = new FileWriter(archivo, false)) {
+    for (String l : lineas) {
+        escritor.write(l + "\n");
+    }
+            } catch (IOException e) {
+                System.out.println("ERROR AL GUARDAR LOS CAMBIOS: ");
+            }
+        }
 }
