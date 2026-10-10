@@ -52,13 +52,7 @@ public class FormularioPacientes extends javax.swing.JFrame {
     
     public FormularioPacientes() {
         initComponents();
-        txtFECHAHORA.setEditable(false);
-        cmbNUMEROCITA.setEditable(false);
-        LocalDateTime ahora = LocalDateTime.now();
-        DateTimeFormatter FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        String textofecha = ahora.format(FECHA);
-        txtFECHAHORA.setText(textofecha);
-        
+
         this.setLocationRelativeTo(null);
     }
 
