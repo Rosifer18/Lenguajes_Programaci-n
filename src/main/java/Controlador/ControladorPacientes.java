@@ -173,7 +173,7 @@ public class ControladorPacientes implements ActionListener{
                     vista.mostrarMensaje("Paciente eliminado del archivo.");
                     vista.limpiarFormulario();
                 } else {
-                    vista.mostrarMensaje("Código no encontrado.");
+                    vista.mostrarMensaje("Dni no encontrado.");
                 }
             } else if (dniEliminar != null) {
                 vista.mostrarMensaje("Ingrese el dni a eliminar.");

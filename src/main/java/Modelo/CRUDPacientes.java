@@ -93,7 +93,7 @@ public class CRUDPacientes {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
-                if (datos.length == 11 && datos[5].equalsIgnoreCase(dniEliminar)) {
+                if (datos.length == 11 && datos[4].equalsIgnoreCase(dniEliminar)) {
                     eliminado = true;
                 } else {
                     lineasGuardar.add(linea);
