@@ -56,7 +56,7 @@ public class ControladorDoctores implements ActionListener{
         }
 
 
-        return new Doctor(codigo, nombre, cargo, especialidad, disponibilidad, horario, telefono);
+        return new Doctor(codigo, nombre, cargo, especialidad,telefono, disponibilidad, horario);
     }
     
     @Override
@@ -66,7 +66,7 @@ public class ControladorDoctores implements ActionListener{
         if (e.getSource() == vista.getBtnGuardar()) {
             Doctor doc = capturarDatos();
             DefaultTableModel modelo = (DefaultTableModel) vista.getJTable1().getModel();
-            modelo.addRow(new Object[]{doc.codigo(), doc.nombre(), doc.cargo(), doc.especialidad(), doc.disponibilidad(), doc.horario(), doc.telefono()});
+            modelo.addRow(new Object[]{doc.codigo(), doc.nombre(), doc.cargo(), doc.especialidad(), doc.telefono(), doc.disponibilidad(), doc.horario()});
 
             vista.limpiarFormulario();
             vista.mostrarMensaje("Doctor guardado con éxito.");
