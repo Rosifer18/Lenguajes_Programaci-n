@@ -1,4 +1,4 @@
-package com.mycompany.sistema_de_programacion_de_citas;
+package Modelo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,102 +6,128 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import Modelo.Paciente;
+import java.io.*;
+import java.util.ArrayList;
 public class CRUDPacientes {
+    private final String rutaArchivo = "pacientes.txt";
 
-    private String archivo = "pacientes.txt";
-
-    // 1. CREAR PACIENTE
-    public void crear(Pacientes p) {
-        try (FileWriter escritor = new FileWriter(archivo, true)) {
-            escritor.write(
-                    p.getNombres() + ";" +
-                    p.getAPELLIDOPATERNO() + ";" +
-                    p.getAPELLIDOMATERNO() + ";" +
-                    p.getDNI() + ";" +
-                    p.getTELEFONO() + ";" +
-                    p.getDIRECCION() + ";" +
-                    p.getCORREO() + ";" 
-            );
-            escritor.write("\n");
+    public boolean guardar(Paciente pac) {
+        try (FileWriter fw = new FileWriter(rutaArchivo, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter pw = new PrintWriter(bw)) {
+            
+         
+            String linea = pac.nombres() + ";" + pac.apellidoPaterno() + ";" + pac.apellidoMaterno() + ";" + pac.fechaNacimiento() + ";" + pac.dni() + ";" + pac.telefono() +  ";" + pac.direccion() + ";" + pac.foto() + ";" + pac.estadoCivil() + ";" + pac.genero() + ";" + pac.correo();
+            pw.println(linea);
+            return true;
         } catch (IOException e) {
-            System.out.println("Error al guardar el paciente: " + e.getMessage());
+            System.out.println("Error al guardar: " + e.getMessage());
+            return false;
         }
     }
 
-    // 2. BUSCAR PACIENTE POR CÓDIGO
-    public Pacientes buscar(String codigo) {
-        try (BufferedReader lector = new BufferedReader(new FileReader(archivo))) {
+    public Paciente buscarPorDni(String dniBuscado) {
+        File archivo = new File(rutaArchivo);
+        if (!archivo.exists()) return null;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
-            while ((linea = lector.readLine()) != null) {
+            while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
-                if (datos.length >= 5 && datos[0].equals(codigo)) {
-                    return new Pacientes(
-                            datos[0],
-                            datos[1],
-                            datos[2],
-                            datos[3],
-                            datos[4],
-                            datos[5],
-                            datos[6]
-                    );
+                if (datos.length == 11 && datos[4].equalsIgnoreCase(dniBuscado)) {
+                    return new Paciente(datos[0], datos[1], datos[2], datos[3], datos[4],datos[5],datos[6],datos[7],datos[8],datos[9],datos[10]);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al buscar el paciente: " + e.getMessage());
+            System.out.println("Error al buscar: " + e.getMessage());
         }
         return null;
     }
 
-    // 3. MODIFICAR PACIENTE
-    public void modificar(Pacientes pacienteModificado) {
-        List<String> lineas = new ArrayList<>();
-        try (BufferedReader lector = new BufferedReader(new FileReader(archivo))) {
+    public boolean modificar(String dniModificar, Paciente nuevoDoc) {
+        File archivoOriginal = new File(rutaArchivo);
+        if (!archivoOriginal.exists()) return false;
+
+        ArrayList<String> lineasGuardar = new ArrayList<>();
+        boolean modificado = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivoOriginal))) {
             String linea;
-            while ((linea = lector.readLine()) != null) {
+            while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
-                if (datos.length > 0 && datos[0].equals(pacienteModificado.getDNI())) {
-                    String lineaNueva = pacienteModificado.getNombres() + ";" +
-                                        pacienteModificado.getAPELLIDOPATERNO() + ";" +
-                                        pacienteModificado.getAPELLIDOMATERNO() + ";" +
-                                        pacienteModificado.getDNI() + ";" +
-                                        pacienteModificado.getTELEFONO() + ";" +
-                                        pacienteModificado.getDIRECCION() + ";" +
-                                        pacienteModificado.getCORREO();
-                    lineas.add(lineaNueva);
+                if (datos.length == 11 && datos[4].equalsIgnoreCase(dniModificar)) {
+                    String nuevaLinea = nuevoDoc.nombres() + ";" + nuevoDoc.apellidoPaterno() + ";" + nuevoDoc.apellidoMaterno() + ";" + nuevoDoc.fechaNacimiento() + ";" + nuevoDoc.dni() + ";" + nuevoDoc.telefono() + ";" + nuevoDoc.direccion()+ ";" + nuevoDoc.foto()  + ";" + nuevoDoc.estadoCivil()  + ";" + nuevoDoc.genero()   + ";" + nuevoDoc.correo();
+                    lineasGuardar.add(nuevaLinea);
+                    modificado = true;
                 } else {
-                    lineas.add(linea);
+                    lineasGuardar.add(linea);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo para modificar: " + e.getMessage());
+            System.out.println("Error al modificar: " + e.getMessage());
+            return false;
         }
-        guardarLineas(lineas);
+
+        if (modificado) {
+            try (FileWriter fw = new FileWriter(archivoOriginal, false)) {
+                for (String l : lineasGuardar) {
+                    fw.write(l);
+                    fw.write(System.lineSeparator());
+                }
+            } catch (IOException e) {
+                return false;
+            }
+        }
+        return modificado;
     }
 
-    // 4. ELIMINAR PACIENTE
-    public void eliminar(String codigo) {
-        List<String> lineas = new ArrayList<>();
-        try (BufferedReader lector = new BufferedReader(new FileReader(archivo))) {
+    public boolean eliminar(String dniEliminar) {
+        File archivoOriginal = new File(rutaArchivo);
+        if (!archivoOriginal.exists()) return false;
+
+        ArrayList<String> lineasGuardar = new ArrayList<>();
+        boolean eliminado = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivoOriginal))) {
             String linea;
-            while ((linea = lector.readLine()) != null) {
+            while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
-                if (datos.length > 0 && !datos[0].equals(codigo)) {
-                    lineas.add(linea);
+                if (datos.length == 11 && datos[5].equalsIgnoreCase(dniEliminar)) {
+                    eliminado = true;
+                } else {
+                    lineasGuardar.add(linea);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo para eliminar: " + e.getMessage());
+            return false;
         }
-        guardarLineas(lineas);
-    }
-        private void guardarLineas(List<String> lineas) {
-            try (FileWriter escritor = new FileWriter(archivo, false)) {
-    for (String l : lineas) {
-        escritor.write(l + "\n");
-    }
+
+        if (eliminado) {
+            try (FileWriter fw = new FileWriter(archivoOriginal, false)) {
+                for (String l : lineasGuardar) {
+                    fw.write(l);
+                    fw.write(System.lineSeparator());
+                }
             } catch (IOException e) {
-                System.out.println("ERROR AL GUARDAR LOS CAMBIOS: ");
+                return false;
             }
         }
+        return eliminado;
+    }
+
+    public boolean guardarLista(ArrayList<Paciente> listaPacientes) {
+        try (FileWriter fw = new FileWriter(rutaArchivo, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter pw = new PrintWriter(bw)) {
+            
+            for (Paciente pac : listaPacientes) {
+                String linea = pac.nombres() + ";" + pac.apellidoPaterno() + ";" + pac.apellidoMaterno() + ";" + pac.fechaNacimiento() + ";" + pac.dni() + ";" + pac.telefono() + ";" + pac.direccion()  + ";" + pac.foto() + ";" + pac.estadoCivil() + ";" + pac.genero() + ";" + pac.correo();
+                pw.println(linea);
+            }
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
 }

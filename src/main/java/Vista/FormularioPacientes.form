@@ -48,29 +48,29 @@
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnGUARDAR" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="btnMODIFICAR" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Component id="btnLIMPIAR" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtAPELLIDOMATERNO" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtApellidoMaterno" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel1" min="-2" pref="86" max="-2" attributes="0"/>
                                   <Component id="txtNombres" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtAPELLIDOPATERNO" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtApellidoPaterno" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel4" min="-2" pref="130" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
-                                  <Component id="jDateChooser1" alignment="0" pref="169" max="32767" attributes="0"/>
+                                  <Component id="txtFechaNacimiento" alignment="0" pref="169" max="32767" attributes="0"/>
                                   <Component id="jLabel7" alignment="0" pref="169" max="32767" attributes="0"/>
                                   <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtDIRECCION" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtTELEFONO" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtDireccion" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel11" min="-2" pref="43" max="-2" attributes="0"/>
-                                  <Component id="txtDNI" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtDni" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -79,30 +79,34 @@
                                           <Group type="102" attributes="0">
                                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                               <Component id="btnCargarFoto" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="txtFoto" min="-2" pref="43" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="lblFoto" min="-2" pref="159" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                                              <Component id="btnBUSCAR" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cmbEstadoCivil" min="-2" pref="159" max="-2" attributes="0"/>
+                                          <Component id="txtEstadoCivil" min="-2" pref="159" max="-2" attributes="0"/>
                                           <Component id="jLabel8" min="-2" pref="102" max="-2" attributes="0"/>
                                           <Component id="jLabel9" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                                           <Component id="rbFemenino" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                                           <Component id="rbMasculino" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                                           <Component id="jLabel10" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                          <Component id="txtCORREO" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
+                                          <Component id="txtCorreo" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="56" max="32767" attributes="0"/>
+                      <EmptySpace pref="8" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -120,31 +124,34 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtAPELLIDOPATERNO" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtApellidoPaterno" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtAPELLIDOMATERNO" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtApellidoMaterno" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtFechaNacimiento" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="lblFoto" min="-2" pref="113" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnCargarFoto" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnCargarFoto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtFoto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                      <Component id="txtDNI" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtDni" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtTELEFONO" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtTelefono" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -152,7 +159,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel8" min="-2" pref="22" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cmbEstadoCivil" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtEstadoCivil" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -162,19 +169,20 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jLabel10" min="-2" pref="16" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtCORREO" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtCorreo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace pref="22" max="32767" attributes="0"/>
-                      <Component id="txtDIRECCION" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDireccion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnGUARDAR" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnMODIFICAR" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnLIMPIAR" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnBUSCAR" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
@@ -194,9 +202,9 @@
                 <Property name="text" type="java.lang.String" value="*APELLIDOS"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtAPELLIDOPATERNO">
+            <Component class="javax.swing.JTextField" name="txtApellidoPaterno">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtAPELLIDOPATERNOActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtApellidoPaternoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -204,7 +212,7 @@
                 <Property name="text" type="java.lang.String" value="APELLIDO PATERNO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtAPELLIDOMATERNO">
+            <Component class="javax.swing.JTextField" name="txtApellidoMaterno">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -216,28 +224,28 @@
                 <Property name="text" type="java.lang.String" value="FECHA DE NACIMIENTO:"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+            <Component class="com.toedter.calendar.JDateChooser" name="txtFechaNacimiento">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="TEL&#xc9;FONO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtTELEFONO">
+            <Component class="javax.swing.JTextField" name="txtTelefono">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="DIRECCI&#xd3;N:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDIRECCION">
+            <Component class="javax.swing.JTextField" name="txtDireccion">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ESTADO CIVIL:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cmbEstadoCivil">
+            <Component class="javax.swing.JComboBox" name="txtEstadoCivil">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
@@ -250,7 +258,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbEstadoCivilActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEstadoCivilActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -274,36 +282,36 @@
                 <Property name="text" type="java.lang.String" value="G&#xc9;NERO DEL PACIENTE:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnGUARDAR">
+            <Component class="javax.swing.JButton" name="btnGuardar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="GUARDAR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGUARDARActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMODIFICAR">
+            <Component class="javax.swing.JButton" name="btnModificar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="MODIFICAR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMODIFICARActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnLIMPIAR">
+            <Component class="javax.swing.JButton" name="btnLimpiar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="LIMPIAR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLIMPIARActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnBUSCAR">
+            <Component class="javax.swing.JButton" name="btnBuscar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="BUSCAR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBUSCARActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblFoto">
@@ -328,14 +336,21 @@
                 <Property name="text" type="java.lang.String" value="CORREO ELECTR&#xd3;NICO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCORREO">
+            <Component class="javax.swing.JTextField" name="txtCorreo">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
                 <Property name="text" type="java.lang.String" value="DNI:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDNI">
+            <Component class="javax.swing.JTextField" name="txtDni">
+            </Component>
+            <Component class="javax.swing.JButton" name="btnEliminar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ELIMINAR"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="txtFoto">
             </Component>
           </SubComponents>
         </Container>
@@ -519,11 +534,8 @@
             <Component class="javax.swing.JComboBox" name="cmbNUMEROCITA">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="Seleccionar"/>
                   </StringArray>
                 </Property>
               </Properties>

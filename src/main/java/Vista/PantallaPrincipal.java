@@ -9,9 +9,12 @@ import Controlador.ControladorMedicamentos;
 import Vista.FormularioDoctores;
 import Modelo.CRUDDoctores;
 import Controlador.ControladorDoctores;
-import com.mycompany.sistema_de_programacion_de_citas.DISEÑOPACIENTES;
-import com.mycompany.sistema_de_programacion_de_citas.Formulario_citas_pacientes;
-import com.mycompany.sistema_de_programacion_de_citas.Usuarios;
+import Vista.FormularioUsuarios;
+import Modelo.CRUDUsuarios;
+import Controlador.ControladorUsuarios;
+import Vista.FormularioPacientes;
+import Modelo.CRUDPacientes;
+import Controlador.ControladorPacientes;
 public class PantallaPrincipal extends javax.swing.JFrame {
 
     /**
@@ -129,7 +132,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        DISEÑOPACIENTES form_pacientes = new DISEÑOPACIENTES();
+        FormularioPacientes form_pacientes = new FormularioPacientes();
+        CRUDPacientes crud_pac = new CRUDPacientes();
+        ControladorPacientes controlador_pac = new ControladorPacientes(form_pacientes,crud_pac);
         form_pacientes.setVisible(true);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
@@ -142,8 +147,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-        Usuarios formulariousuario = new Usuarios();
-        formulariousuario.setVisible(true);
+        FormularioUsuarios form_usu = new FormularioUsuarios();
+        CRUDUsuarios crud_usu = new CRUDUsuarios();
+        ControladorUsuarios controlador_usu = new ControladorUsuarios(form_usu,crud_usu);
+        form_usu.setVisible(true);
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed

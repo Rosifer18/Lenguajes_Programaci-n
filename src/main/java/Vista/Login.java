@@ -4,8 +4,7 @@
  */
 package Vista;
 
-import com.mycompany.sistema_de_programacion_de_citas.Formulario_registrar_citas;
-import com.mycompany.sistema_de_programacion_de_citas.GestorSesion;
+import Modelo.GestorSesion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -114,7 +113,7 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String usuario=jTextField1.getText();
         String contraseña= new String(jPasswordField1.getPassword());
-        File archivo = new File("registros.txt");
+        File archivo = new File("usuarios.txt");
         if (!archivo.exists()) {
         JOptionPane.showMessageDialog(this, "El archivo de registros aún no existe.");
         return;

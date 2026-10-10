@@ -1,16 +1,58 @@
-package com.mycompany.sistema_de_programacion_de_citas;
+package Vista;
 
+import Modelo.Paciente;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-public class DISEÑOPACIENTES extends javax.swing.JFrame {
+public class FormularioPacientes extends javax.swing.JFrame {
    
-java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
+    public javax.swing.JTextField getTxtNombres() { return txtNombres; }
+    public javax.swing.JTextField getTxtApellidoPaterno() { return txtApellidoPaterno; }
+    public javax.swing.JTextField getTxtApellidoMaterno() { return txtApellidoMaterno; }
+    public com.toedter.calendar.JDateChooser getTxtFechaNacimiento() { return txtFechaNacimiento; }
+    public javax.swing.JTextField getTxtDni() { return txtDni; }
+    public javax.swing.JTextField getTxtTelefono() { return txtTelefono; }
+    public javax.swing.JTextField getTxtDireccion() { return txtDireccion; }
+    public javax.swing.JLabel getTxtFoto() { return txtFoto; }
+    public javax.swing.JComboBox getTxtEstadoCivil() { return txtEstadoCivil; }
+    public javax.swing.JRadioButton getTxtRbFemenino() { return rbFemenino; }
+    public javax.swing.JRadioButton getTxtRbMasculino() { return rbMasculino; }
+    public javax.swing.JTextField getTxtCorreo() { return txtCorreo; }
+    public javax.swing.JButton getBtnGuardar() { return btnGuardar; }
+    public javax.swing.JButton getBtnBuscar() { return btnBuscar; }
+    public javax.swing.JButton getBtnModificar() { return btnModificar; }
+    public javax.swing.JButton getBtnEliminar() { return btnEliminar; }
+    public javax.swing.JButton getBtnCargarFoto() { return btnCargarFoto; }
+    public javax.swing.JLabel getLblFoto() { return lblFoto; }
+java.util.List<Paciente> listaPacientes = new java.util.ArrayList<>();
     private String rutaFoto = "";
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DISEÑOPACIENTES.class.getName());
-
-    public DISEÑOPACIENTES() {
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormularioPacientes.class.getName());
+    
+    
+    public void limpiarFormulario() {
+    txtNombres.setText("");
+    txtApellidoPaterno.setText("");
+    txtApellidoMaterno.setText("");
+    txtFechaNacimiento.setDate(null);
+    txtDni.setText("");
+    txtTelefono.setText("");
+    txtDireccion.setText("");
+    txtEstadoCivil.setSelectedIndex(0);
+    rbFemenino.setSelected(false);
+    rbMasculino.setSelected(false);
+    txtCorreo.setText("");
+    
+    txtNombres.requestFocus();
+    }
+    
+    public void mostrarMensaje(String texto) {
+    javax.swing.JOptionPane.showMessageDialog(this, texto);
+    }
+    
+    
+    
+    public FormularioPacientes() {
         initComponents();
         txtFECHAHORA.setEditable(false);
         cmbNUMEROCITA.setEditable(false);
@@ -31,31 +73,33 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
         jLabel1 = new javax.swing.JLabel();
         txtNombres = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtAPELLIDOPATERNO = new javax.swing.JTextField();
+        txtApellidoPaterno = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtAPELLIDOMATERNO = new javax.swing.JTextField();
+        txtApellidoMaterno = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtFechaNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        txtTELEFONO = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtDIRECCION = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        cmbEstadoCivil = new javax.swing.JComboBox<>();
+        txtEstadoCivil = new javax.swing.JComboBox<>();
         rbMasculino = new javax.swing.JRadioButton();
         rbFemenino = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
-        btnGUARDAR = new javax.swing.JButton();
-        btnMODIFICAR = new javax.swing.JButton();
-        btnLIMPIAR = new javax.swing.JButton();
-        btnBUSCAR = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         lblFoto = new javax.swing.JLabel();
         btnCargarFoto = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        txtCORREO = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtDNI = new javax.swing.JTextField();
+        txtDni = new javax.swing.JTextField();
+        btnEliminar = new javax.swing.JButton();
+        txtFoto = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         txtDIAGNOSTICO = new javax.swing.JTextField();
@@ -88,7 +132,7 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
 
         jLabel2.setText("*APELLIDOS");
 
-        txtAPELLIDOPATERNO.addActionListener(this::txtAPELLIDOPATERNOActionPerformed);
+        txtApellidoPaterno.addActionListener(this::txtApellidoPaternoActionPerformed);
 
         jLabel3.setText("APELLIDO PATERNO:");
 
@@ -102,8 +146,8 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
 
         jLabel8.setText("ESTADO CIVIL:");
 
-        cmbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona", "Soltero(a)", "Casado(a)", "Viudo(a)", "Divorciado(a)" }));
-        cmbEstadoCivil.addActionListener(this::cmbEstadoCivilActionPerformed);
+        txtEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona", "Soltero(a)", "Casado(a)", "Viudo(a)", "Divorciado(a)" }));
+        txtEstadoCivil.addActionListener(this::txtEstadoCivilActionPerformed);
 
         rbMasculino.setText("Masculino");
 
@@ -112,17 +156,17 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
 
         jLabel9.setText("GÉNERO DEL PACIENTE:");
 
-        btnGUARDAR.setText("GUARDAR");
-        btnGUARDAR.addActionListener(this::btnGUARDARActionPerformed);
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
-        btnMODIFICAR.setText("MODIFICAR");
-        btnMODIFICAR.addActionListener(this::btnMODIFICARActionPerformed);
+        btnModificar.setText("MODIFICAR");
+        btnModificar.addActionListener(this::btnModificarActionPerformed);
 
-        btnLIMPIAR.setText("LIMPIAR");
-        btnLIMPIAR.addActionListener(this::btnLIMPIARActionPerformed);
+        btnLimpiar.setText("LIMPIAR");
+        btnLimpiar.addActionListener(this::btnLimpiarActionPerformed);
 
-        btnBUSCAR.setText("BUSCAR");
-        btnBUSCAR.addActionListener(this::btnBUSCARActionPerformed);
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -133,6 +177,8 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
 
         jLabel11.setText("DNI:");
 
+        btnEliminar.setText("ELIMINAR");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,50 +187,54 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGUARDAR)
+                        .addComponent(btnGuardar)
                         .addGap(36, 36, 36)
-                        .addComponent(btnMODIFICAR)
+                        .addComponent(btnModificar)
                         .addGap(41, 41, 41)
-                        .addComponent(btnLIMPIAR))
+                        .addComponent(btnLimpiar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtAPELLIDOMATERNO)
+                            .addComponent(txtApellidoMaterno)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombres)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtAPELLIDOPATERNO)
+                            .addComponent(txtApellidoPaterno)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDIRECCION)
-                            .addComponent(txtTELEFONO)
+                            .addComponent(txtDireccion)
+                            .addComponent(txtTelefono)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDNI))
+                            .addComponent(txtDni))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(116, 116, 116)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addComponent(btnCargarFoto))
+                                        .addComponent(btnCargarFoto)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(85, 85, 85)
-                                        .addComponent(btnBUSCAR))))
+                                        .addComponent(btnBuscar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnEliminar))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(99, 99, 99)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rbFemenino, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rbMasculino, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCORREO, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(56, Short.MAX_VALUE))
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,37 +250,39 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAPELLIDOPATERNO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAPELLIDOMATERNO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCargarFoto)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCargarFoto)
+                            .addComponent(txtFoto))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(64, 64, 64)
                                 .addComponent(jLabel11)
                                 .addGap(9, 9, 9)
-                                .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTELEFONO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -240,15 +292,16 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCORREO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(txtDIRECCION, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGUARDAR)
-                    .addComponent(btnMODIFICAR)
-                    .addComponent(btnLIMPIAR)
-                    .addComponent(btnBUSCAR))
+                    .addComponent(btnGuardar)
+                    .addComponent(btnModificar)
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnBuscar)
+                    .addComponent(btnEliminar))
                 .addGap(16, 16, 16))
         );
 
@@ -278,7 +331,7 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
 
         btnGUARDARHISTORIAL.setText("GUARDAR");
 
-        cmbNUMEROCITA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbNUMEROCITA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
         cmbNUMEROCITA.addItemListener(this::cmbNUMEROCITAItemStateChanged);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -432,172 +485,42 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtAPELLIDOPATERNOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAPELLIDOPATERNOActionPerformed
+    private void txtApellidoPaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPaternoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAPELLIDOPATERNOActionPerformed
+    }//GEN-LAST:event_txtApellidoPaternoActionPerformed
 
     private void txtDIAGNOSTICOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDIAGNOSTICOActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDIAGNOSTICOActionPerformed
 
-    private void cmbEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoCivilActionPerformed
+    private void txtEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstadoCivilActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEstadoCivilActionPerformed
+    }//GEN-LAST:event_txtEstadoCivilActionPerformed
 
     private void btnCargarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarFotoActionPerformed
-  JFileChooser fileChooser = new JFileChooser();
-  FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes(*. jpg, *.png)","jpg","png");
-  fileChooser.setFileFilter(filtro);
+  
     }//GEN-LAST:event_btnCargarFotoActionPerformed
 
-    private void btnGUARDARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGUARDARActionPerformed
-      if(txtNombres.getText().trim().isEmpty()){
-          javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el nombre del paciente.");
-          txtNombres.requestFocus();
-          return;
-      }
-      if(txtAPELLIDOPATERNO.getText().trim().isEmpty()){
-          javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el apellido paterno del paciente.");
-          txtAPELLIDOPATERNO.requestFocus();
-          return;
-      }
-      if (txtAPELLIDOMATERNO.getText(). trim().isEmpty()){
-          javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el apellido materno del paciente");
-          txtAPELLIDOMATERNO.requestFocus();
-          return;
-      }
-    if(jDateChooser1.getDate() == null){
-        javax.swing.JOptionPane.showMessageDialog (this, "Debe seleccionar la fecha de nacimiento.");
-        jDateChooser1.requestFocus();
-        return;
-    }
-    if(txtDNI.getText().trim().isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el DNI del paciente");
-        txtDNI.requestFocus();
-        return;
-    }
-    if(txtTELEFONO.getText().trim().isEmpty()){
-        javax.swing.JOptionPane.showMessageDialog(this,"Debe ingresar el número del teléfono del paciente.");
-        txtTELEFONO.requestFocus();
-        return;
-    }
-    if(txtDIRECCION.getText().trim().isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this,"Debe ingresar la dirección del paciente.");
-        txtDIRECCION.requestFocus();
-        return;       
-    }
-    if(cmbEstadoCivil.getSelectedIndex()== 0){
-        javax.swing.JOptionPane.showMessageDialog(this,"Debe seleccionar un estado civil.");
-        cmbEstadoCivil.requestFocus();
-    return;
-    }
-    if(!rbFemenino.isSelected() && !rbMasculino.isSelected()) {
-        javax.swing.JOptionPane.showMessageDialog (this, "Debe seleccionar el género del paciente.");
-        return;
-      }
-    String genero = "";
-    if(rbFemenino.isSelected()) {
-        genero = "Femenino";
-    }else if(rbMasculino.isSelected()) {
-             genero = "Masculino";
-    }
-    if(txtCORREO.getText().trim().isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog (this,"Debe ingresar el correo electrónico del paciente.");
-        txtCORREO.requestFocus();
-    return;
-    }
-    javax.swing.JOptionPane.showMessageDialog(this, "¡Paciente registrado con éxito! \nGénero seleccionado: " + genero);
-    
-    
-    }//GEN-LAST:event_btnGUARDARActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+      
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void rbFemeninoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFemeninoActionPerformed
 
     }//GEN-LAST:event_rbFemeninoActionPerformed
 
-    private void btnLIMPIARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLIMPIARActionPerformed
-    txtNombres.setText("");
-    txtAPELLIDOPATERNO.setText("");
-    txtAPELLIDOMATERNO.setText("");
-    jDateChooser1.setDate(null);
-    txtDNI.setText("");
-    txtTELEFONO.setText("");
-    txtDIRECCION.setText("");
-    cmbEstadoCivil.setSelectedIndex(0);
-    rbFemenino.setSelected(false);
-    rbMasculino.setSelected(false);
-    txtCORREO.setText("");
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+    limpiarFormulario();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
     
-    txtDNI.requestFocus();
-    }//GEN-LAST:event_btnLIMPIARActionPerformed
-
-    private void btnBUSCARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBUSCARActionPerformed
-    String dniBuscado = javax.swing.JOptionPane.showInputDialog(
-        null, 
-        "Ingrese solo el DNI para buscar:", 
-        "Búsqueda de Paciente", 
-        javax.swing.JOptionPane.QUESTION_MESSAGE
-    );
-
-    if (dniBuscado == null) return;
-
-    dniBuscado = dniBuscado.trim();
-
-    if (dniBuscado.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(null, "Debe ingresar un DNI.");
-        return;
-    }
-
-    txtDNI.setText(dniBuscado);
-
-    boolean encontrado = false;
-
-    for (Pacientes p : listaPacientes) {
-        if (p.getDNI().equals(dniBuscado)) {
-            txtNombres.setText(p.getNombres());
-            txtAPELLIDOPATERNO.setText(p.getAPELLIDOPATERNO());
-            txtAPELLIDOMATERNO.setText(p.getAPELLIDOMATERNO());
-            txtTELEFONO.setText(p.getTELEFONO());
-            txtDIRECCION.setText(p.getDIRECCION());
-            txtCORREO.setText(p.getCORREO());
-
-            encontrado = true;
-            javax.swing.JOptionPane.showMessageDialog(null, "Paciente encontrado.");
-            break;
-        }
-    }
-
-    if (!encontrado) {
-        javax.swing.JOptionPane.showMessageDialog(null, "No se encontró ningún paciente con el DNI: " + dniBuscado);
-    }
    
-    }//GEN-LAST:event_btnBUSCARActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnMODIFICARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMODIFICARActionPerformed
-    String DNIBuscado = txtDNI.getText().trim();
-    if (DNIBuscado.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(null,"Primero busque o ingrese el DNI del paciente.");
-        return;
-    }
-    boolean modificado = false;
-    for (Pacientes p : listaPacientes) {
-        if (p.getDNI().equals(DNIBuscado)) {
-            p.setNombres(txtNombres.getText().trim());
-            p.setAPELLIDOPATERNO(txtAPELLIDOPATERNO.getText().trim());
-            p.setAPELLIDOMATERNO(txtAPELLIDOMATERNO.getText().trim());
-            p.setTELEFONO(txtTELEFONO.getText().trim());
-            p.setDIRECCION(txtDIRECCION.getText().trim());
-            p.setCORREO(txtCORREO.getText().trim());
-            
-            modificado = true;
-            javax.swing.JOptionPane.showMessageDialog(null,"Datos del paciente actualizados con éxito.");
-            break; 
-        }
-    }
-    if (!modificado) {
-        javax.swing.JOptionPane.showMessageDialog(null,"No se encontró el paciente para modificar");
-    }
-    }//GEN-LAST:event_btnMODIFICARActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+    
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void txtFECHAHORAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFECHAHORAActionPerformed
 
@@ -627,18 +550,17 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane PanelRegistroPacientes;
-    private javax.swing.JButton btnBUSCAR;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCargarFoto;
     private javax.swing.JButton btnEDITARINFORMACION;
-    private javax.swing.JButton btnGUARDAR;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGUARDARHISTORIAL;
-    private javax.swing.JButton btnLIMPIAR;
-    private javax.swing.JButton btnMODIFICAR;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> cmbCLASIFICACION;
-    private javax.swing.JComboBox<String> cmbEstadoCivil;
     private javax.swing.JComboBox<String> cmbNUMEROCITA;
     private javax.swing.JButton jButton9;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -670,16 +592,19 @@ java.util.List<Pacientes> listaPacientes = new java.util.ArrayList<>();
     private javax.swing.JLabel lblFoto;
     private javax.swing.JRadioButton rbFemenino;
     private javax.swing.JRadioButton rbMasculino;
-    private javax.swing.JTextField txtAPELLIDOMATERNO;
-    private javax.swing.JTextField txtAPELLIDOPATERNO;
-    private javax.swing.JTextField txtCORREO;
+    private javax.swing.JTextField txtApellidoMaterno;
+    private javax.swing.JTextField txtApellidoPaterno;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDIAGNOSTICO;
-    private javax.swing.JTextField txtDIRECCION;
-    private javax.swing.JTextField txtDNI;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JComboBox<String> txtEstadoCivil;
     private javax.swing.JTextField txtFECHAHORA;
+    private com.toedter.calendar.JDateChooser txtFechaNacimiento;
+    private javax.swing.JLabel txtFoto;
     private javax.swing.JTextField txtINDICACIONES;
     private javax.swing.JTextField txtMEDICAMENTOS;
     private javax.swing.JTextField txtNombres;
-    private javax.swing.JTextField txtTELEFONO;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
