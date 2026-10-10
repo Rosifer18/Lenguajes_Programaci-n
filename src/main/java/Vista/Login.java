@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorCitas;
+import Modelo.CRUDCitas;
 import Modelo.GestorSesion;
 import java.io.BufferedReader;
 import java.io.File;
@@ -127,15 +129,17 @@ public class Login extends javax.swing.JFrame {
         while ((linea = br.readLine()) != null) {
             String[] datos = linea.split(";");
             
-            if (datos.length == 3 && datos[0].equalsIgnoreCase(usuario) && datos[2].equals(contraseña)) {
+            if (datos.length == 2 && datos[0].equalsIgnoreCase(usuario) && datos[1].equals(contraseña)) {
                 loginExitoso = true;
                 GestorSesion.guardarSesion(usuario);
                 if (datos[0].equals("admin")){
                     PantallaPrincipal pantallaprincipal= new PantallaPrincipal();
                     pantallaprincipal.setVisible(true);
                 }else{
-                Formulario_registrar_citas reg_citas = new Formulario_registrar_citas();
-                reg_citas.setVisible(true);
+                    FormularioCitas form_citas = new FormularioCitas();
+                    CRUDCitas  crud_citas = new CRUDCitas();
+                    ControladorCitas controlador_cit = new ControladorCitas(form_citas,crud_citas);
+                    form_citas.setVisible(true);
                 }
                 this.dispose();
                 break;

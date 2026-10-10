@@ -49,14 +49,17 @@ public class ControladorUsuarios implements ActionListener{
         
         if (e.getSource() == vista.getBtnGuardar()) {
             Usuario usu = capturarDatos();
-            DefaultTableModel modelo = (DefaultTableModel) vista.getJTable1().getModel();
-            modelo.addRow(new Object[]{usu.nombre(), usu.contraseña()});
+            if (usu != null) {
+                DefaultTableModel modelo = (DefaultTableModel) vista.getJTable1().getModel();
+                modelo.addRow(new Object[]{
+                    usu.nombre(), 
+                    usu.contraseña()
+                });
 
-            vista.limpiarFormulario();
-            vista.mostrarMensaje("Usuario guardado con éxito.");
-            
+                vista.limpiarFormulario();
+                vista.mostrarMensaje("Usuario guardado con éxito.");
+            }
         }
-        
         if (e.getSource() == vista.getBtnBuscar()) {
             String nombreBuscado = javax.swing.JOptionPane.showInputDialog(
                 null, 

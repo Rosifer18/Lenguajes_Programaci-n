@@ -50,6 +50,7 @@ public class ControladorDoctores implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         
+
         if (e.getSource() == vista.getBtnGuardar()) {
             Doctor doc = capturarDatos();
             DefaultTableModel modelo = (DefaultTableModel) vista.getJTable1().getModel();
@@ -59,7 +60,6 @@ public class ControladorDoctores implements ActionListener{
             vista.mostrarMensaje("Doctor guardado con éxito.");
             
         }
-        
         if (e.getSource() == vista.getBtnBuscar()) {
             String codigoBuscado = javax.swing.JOptionPane.showInputDialog(
                 null, 
@@ -153,3 +153,4 @@ public class ControladorDoctores implements ActionListener{
         
     }
 }
+

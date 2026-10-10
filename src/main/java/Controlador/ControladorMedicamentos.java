@@ -54,7 +54,6 @@ public class ControladorMedicamentos implements ActionListener{
             vista.mostrarMensaje("Medicamento guardado con éxito.");
             
         }
-        
         if (e.getSource() == vista.getBtnBuscar()) {
             String codigoBuscado = javax.swing.JOptionPane.showInputDialog(
                 null, 

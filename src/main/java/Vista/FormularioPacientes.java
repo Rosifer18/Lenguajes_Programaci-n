@@ -25,8 +25,6 @@ public class FormularioPacientes extends javax.swing.JFrame {
     public javax.swing.JButton getBtnEliminar() { return btnEliminar; }
     public javax.swing.JButton getBtnCargarFoto() { return btnCargarFoto; }
     public javax.swing.JLabel getLblFoto() { return lblFoto; }
-java.util.List<Paciente> listaPacientes = new java.util.ArrayList<>();
-    private String rutaFoto = "";
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormularioPacientes.class.getName());
     
     
@@ -325,7 +323,7 @@ java.util.List<Paciente> listaPacientes = new java.util.ArrayList<>();
 
         txtFECHAHORA.addActionListener(this::txtFECHAHORAActionPerformed);
 
-        jLabel21.setText("NÚMERO DE CITAS:");
+        jLabel21.setText("CÓDIGO DE CITAS:");
 
         btnEDITARINFORMACION.setText("EDITAR INFORMACIÓN");
 

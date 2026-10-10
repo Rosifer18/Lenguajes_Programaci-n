@@ -9,3 +9,5 @@ C003;Paola;Enfermera;Pediatra;920923504
 ;;;;
 ;;;;
 adf;adsf;ads;adf;asdf;Disponible;asdf
+001;manolo;nose;tmp;434 242 341;Disponible;12:31 - 31:23
+sdafssdf;alejandro;asdfasf;asdfasfd;241 241 243;Disponible;24:23 - 43:24
