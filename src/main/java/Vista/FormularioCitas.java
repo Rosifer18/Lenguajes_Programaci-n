@@ -29,7 +29,7 @@ public class FormularioCitas extends javax.swing.JFrame {
     public com.toedter.calendar.JDateChooser getTxtDia() { return txtDia; }
     public javax.swing.JTextField getTxtHora() { return txtHora; }
     public javax.swing.JTextField getTxtDiagnostico() { return txtDiagnostico; }
-    public javax.swing.JComboBox getTxtGravedad() { return txtGravedad; }
+    public javax.swing.JComboBox getTxtGravedad() { return Sano; }
     public javax.swing.JButton getBtnGuardar() { return btnGuardar; }
     public javax.swing.JButton getBtnBuscar() { return btnBuscar; }
     public javax.swing.JButton getBtnModificar() { return btnModificar; }
@@ -46,7 +46,7 @@ public class FormularioCitas extends javax.swing.JFrame {
     txtDia.setDate(null);
     txtHora.setText("");
     txtDiagnostico.setText("");
-    txtGravedad.setSelectedIndex(0);
+    Sano.setSelectedIndex(0);
     
     txtCodigo.requestFocus();
     }
@@ -118,7 +118,7 @@ public class FormularioCitas extends javax.swing.JFrame {
         txtPaciente = new javax.swing.JComboBox<>();
         txtDoctor = new javax.swing.JComboBox<>();
         txtMedicamento = new javax.swing.JComboBox<>();
-        txtGravedad = new javax.swing.JComboBox<>();
+        Sano = new javax.swing.JComboBox<>();
         txtDia = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -165,7 +165,7 @@ public class FormularioCitas extends javax.swing.JFrame {
         txtMedicamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno" }));
         txtMedicamento.addActionListener(this::txtMedicamentoActionPerformed);
 
-        txtGravedad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aun no evaluado" }));
+        Sano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aun no evaluado" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,7 +198,7 @@ public class FormularioCitas extends javax.swing.JFrame {
                                 .addComponent(btnModificar))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtDia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtGravedad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Sano, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtMedicamento, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtDoctor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtPaciente, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -248,7 +248,7 @@ public class FormularioCitas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtGravedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Sano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
@@ -292,6 +292,7 @@ public class FormularioCitas extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Sano;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
@@ -309,7 +310,6 @@ public class FormularioCitas extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser txtDia;
     private javax.swing.JTextField txtDiagnostico;
     private javax.swing.JComboBox<String> txtDoctor;
-    private javax.swing.JComboBox<String> txtGravedad;
     private javax.swing.JTextField txtHora;
     private javax.swing.JComboBox<String> txtMedicamento;
     private javax.swing.JComboBox<String> txtPaciente;

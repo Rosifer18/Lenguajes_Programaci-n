@@ -45,7 +45,7 @@ public class CRUDPacientes {
         return null;
     }
 
-    public boolean modificar(String dniModificar, Paciente nuevoDoc) {
+    public boolean modificar(String dniModificar, Paciente nuevoPac) {
         File archivoOriginal = new File(rutaArchivo);
         if (!archivoOriginal.exists()) return false;
 
@@ -57,7 +57,7 @@ public class CRUDPacientes {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
                 if (datos.length == 11 && datos[4].equalsIgnoreCase(dniModificar)) {
-                    String nuevaLinea = nuevoDoc.nombres() + ";" + nuevoDoc.apellidoPaterno() + ";" + nuevoDoc.apellidoMaterno() + ";" + nuevoDoc.fechaNacimiento() + ";" + nuevoDoc.dni() + ";" + nuevoDoc.telefono() + ";" + nuevoDoc.direccion()+ ";" + nuevoDoc.foto()  + ";" + nuevoDoc.estadoCivil()  + ";" + nuevoDoc.genero()   + ";" + nuevoDoc.correo();
+                    String nuevaLinea = nuevoPac.nombres() + ";" + nuevoPac.apellidoPaterno() + ";" + nuevoPac.apellidoMaterno() + ";" + nuevoPac.fechaNacimiento() + ";" + nuevoPac.dni() + ";" + nuevoPac.telefono() + ";" + nuevoPac.direccion()+ ";" + nuevoPac.foto()  + ";" + nuevoPac.estadoCivil()  + ";" + nuevoPac.genero()   + ";" + nuevoPac.correo();
                     lineasGuardar.add(nuevaLinea);
                     modificado = true;
                 } else {
