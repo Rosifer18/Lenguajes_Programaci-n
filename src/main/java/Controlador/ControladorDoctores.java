@@ -42,6 +42,18 @@ public class ControladorDoctores implements ActionListener{
             vista.mostrarMensaje("Por favor, complete todos los campos.");
             return null; 
         }
+        String regexHorario = "^([01]?[0-9]|2[0-3]):[0-5][0-9] - ([01]?[0-9]|2[0-3]):[0-5][0-9]$";
+        if (!horario.matches(regexHorario)) {
+            vista.mostrarMensaje("El horario debe tener el formato válido (Ej: 08:00 - 17:00).");
+            return null;
+        }
+
+        
+        String telefonoLimpio = telefono.replace(" ", "").trim();
+        if (!telefonoLimpio.matches("^9\\d{8}$")) {
+            vista.mostrarMensaje("El teléfono celular debe tener 9 dígitos y empezar con 9 (Ej: 912 345 678).");
+            return null;
+        }
 
 
         return new Doctor(codigo, nombre, cargo, especialidad, disponibilidad, horario, telefono);

@@ -1,1 +1,2 @@
 Laura;Silva;Paredes;2026-10-08;50505050;123456789;asdfa;Sin título.png;Soltero(a);Femenino;asdfa
+andres;manto;alegre;2026-10-06;22342324;923424242;sdfasf;Sin título.jpg;Soltero(a);Masculino;asdsfa@gmail.com

@@ -29,7 +29,7 @@ public class ControladorCitas implements ActionListener{
     
     
     public void ConfigurarCombobox(){
-        System.out.println("aaaa");
+        
         File archivo = new File(rutaArchivo);
         String usuarioLogueado = (GestorSesion.obtenerUsuarioLogueado()).trim();
         System.out.println(usuarioLogueado);
@@ -162,7 +162,19 @@ public class ControladorCitas implements ActionListener{
             vista.mostrarMensaje("Por favor, complete todos los campos.");
             return null; 
         }
+        if (!hora.matches("^([01]\\d|2[0-3]):([0-5]\\d)$")) {
+            vista.mostrarMensaje("El formato de la hora es inválido. Use el formato HH:mm (Ej: 14:30).");
+            return null;
+        }
+        if (paciente.equalsIgnoreCase("Seleccionar")) {
+            vista.mostrarMensaje("Por favor, seleccione un paciente válido.");
+            return null;
+        }
 
+        if (doctor.equalsIgnoreCase("Seleccionar")) {
+            vista.mostrarMensaje("Por favor, seleccione un doctor válido.");
+            return null;
+        }
 
         return new Cita(codigo, paciente, doctor, medicamento, dia, hora, diagnostico,gravedad);
     }

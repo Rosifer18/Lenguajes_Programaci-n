@@ -15,6 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
+
 public class ControladorPacientes implements ActionListener{
     private CRUDPacientes crud;
     private FormularioPacientes vista;
@@ -45,7 +47,7 @@ public class ControladorPacientes implements ActionListener{
             return null;
         }
         String dni = vista.getTxtDni().getText().trim();
-        String telefono = vista.getTxtTelefono().getText().trim();
+        String telefono = vista.getTxtTelefono().getText().trim().replaceAll("\\s+", "");
         String direccion = vista.getTxtDireccion().getText().trim();
         String foto = vista.getTxtFoto().getText().trim();
         String estadoCivil = ((String)vista.getTxtEstadoCivil().getSelectedItem()).trim();
@@ -60,10 +62,29 @@ public class ControladorPacientes implements ActionListener{
             genero = "Masculino";
         }
         String correo = vista.getTxtCorreo().getText().trim();
-
+        
+        
         if (nombres.isEmpty() || apellidoPaterno.isEmpty() || apellidoMaterno.isEmpty() || fechaNacimiento.isEmpty() || dni.isEmpty()|| telefono.isEmpty()|| direccion.isEmpty()|| foto.isEmpty()|| estadoCivil.isEmpty()|| genero.isEmpty()|| correo.isEmpty()) {
             vista.mostrarMensaje("Por favor, complete todos los campos.");
             return null; 
+        }
+        
+        if (!dni.matches("\\d{8}")) {
+            vista.mostrarMensaje("El DNI debe contener exactamente 8 dígitos numéricos.");
+            return null;
+        }
+
+        
+        if (!telefono.matches("^9\\d{8}$")) {
+            vista.mostrarMensaje("El teléfono debe ser un número válido de 9 dígitos (Ej: 912345678).");
+            return null;
+        }
+
+        
+        String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+        if (!correo.matches(emailRegex)) {
+            vista.mostrarMensaje("El formato del correo electrónico es inválido (Ej: usuario@dominio.com).");
+            return null;
         }
 
 

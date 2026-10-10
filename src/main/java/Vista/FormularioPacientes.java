@@ -1,6 +1,8 @@
 package Vista;
 
 import Modelo.Paciente;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.time.LocalDateTime;
@@ -54,6 +56,86 @@ public class FormularioPacientes extends javax.swing.JFrame {
         initComponents();
 
         this.setLocationRelativeTo(null);
+        
+        txtTelefono.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+
+                
+                if (c == '\b') {
+                    return;
+                }
+
+                
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                    return;
+                }
+
+                String textoActual = txtTelefono.getText();
+                int len = textoActual.length();
+
+                
+                if (len == 3) {
+                    e.consume();
+                    txtTelefono.setText(textoActual + " " + c);
+                } else if (len == 7) {
+                    e.consume();
+                    txtTelefono.setText(textoActual + " " + c);
+                } else if (len >= 11) {
+                    e.consume(); 
+                }
+            }
+        });
+        
+        txtDni.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+
+           
+                if (Character.isISOControl(c)) {
+                    return;
+                }
+
+                if (!Character.isDigit(c)) {
+                    e.consume(); // Descarta la tecla si no es número
+                    return;
+                }
+
+               
+                if (txtDni.getText().length() >= 8) {
+                    e.consume(); // 
+                }
+            }
+        });
+        txtCorreo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+
+            
+                if (Character.isISOControl(c)) {
+                    return;
+                }
+
+                String caracteresValidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._%+-@";
+
+               
+                if (caracteresValidos.indexOf(c) == -1) {
+                    e.consume();
+                    return;
+                }
+
+       
+                if (c == '@') {
+                    if (txtCorreo.getText().contains("@")) {
+                        e.consume(); // 
+                    }
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")

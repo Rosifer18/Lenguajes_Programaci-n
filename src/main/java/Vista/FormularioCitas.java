@@ -136,6 +136,8 @@ public class FormularioCitas extends javax.swing.JFrame {
 
         jLabel6.setText("Hora:");
 
+        txtHora.addActionListener(this::txtHoraActionPerformed);
+
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
@@ -279,6 +281,10 @@ public class FormularioCitas extends javax.swing.JFrame {
     private void txtMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMedicamentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMedicamentoActionPerformed
+
+    private void txtHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHoraActionPerformed
 
     /**
      * @param args the command line arguments
